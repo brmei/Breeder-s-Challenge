@@ -57,7 +57,7 @@ function addMouse(bypass,name) {
             birthName = randNames[randNumb];
             miceNames.push(birthName);
         } else {
-            poor();
+            error();
         }
         miceAge.push(-3);
         miceHealth.push(100);
@@ -116,7 +116,7 @@ function parA(i) {
         $("#p1name").text(miceNames[i]);
         par1 = i;
     } else {
-        poor();    
+        young();    
     }
 }
 function parB(i) {
@@ -124,7 +124,7 @@ function parB(i) {
         $("#p2name").text(miceNames[i]);
         par2 = i;
     } else {
-        poor();    
+        young();    
     }
 }
 function resetBreed() {
@@ -272,7 +272,7 @@ $("#breedMouse").click(function(){
         addMouse(0,breedName);
         resetBreed();   
     } else {
-        poor();    
+        error();    
     }
 });
 $("#buyMouse").click(function(){
@@ -377,6 +377,12 @@ $("#buyIns").click(function(){
 });
 function poor() {
     alert("Insufficient Funds!");
+}
+function young() {
+    alert("Insufficient Age!");
+}
+function error() {
+    alert("Insufficient Needs!");
 }
 $("#start").click(function(){
     setInterval(weekCycle(), 100);
