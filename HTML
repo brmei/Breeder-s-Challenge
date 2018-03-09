@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Breeder's Challenge</title>
+        <style>#container {
+    border: solid black 1px;
+    margin: 10px;
+}
+.org {
+    border: solid black 1px;    
+    padding: 10px;
+}
+#note54482 {
+    font-size: 8px;    
+}</style>
+        <script>
+        var money = 100;
+//money is earned by selling mice, it is used to buy mice, space, and other things.
+var time = 0;
+//time is used to determine mice growth. Ez
+var temp = 22;
+var ins = 1;
+//temperature can control mice health. SAO is good. 30-32 is healthy. 20-25 default
+var space = 100;
+//space determines the amount of mice the breeder could have
+var food = 100;
+//food is necessary for mice growth. Without enough food, mice lose health. Mice requires 5 grams per day
+var miceNames = [
+    "Joshua",
+    "Daniel",
+    "Pedro"  
+];
+var miceAge = [
+    0,
+    0,
+    0
+];
+var miceHealth = [
+    100,
+    100,
+    100
+];
+var miceTraitA = [
+    2,
+    3,
+    1
+];
+var miceTraitB = [
+    1,
+    3,
+    2
+];
+var miceTraitC = [
+    2,
+    2,
+    2
+];
+var miceTraitD = [
+    1,
+    2,
+    1
+];
+var miceTraitE = [
+    2,
+    1,
+    3
+];
+
+var randNames = [
+    "Joshua","Pedro","Phillip","Dancy","Dantey","Douglas","Brian","Anthony","Matthew","Eric","Christy","Thinh","Ruben","Kevin","Burrito","Wilson","Li Wei","Thomas","Dalton","Jacky","Clinton","Albert","Edmond","Emmanuel","Salamander","Ruhma","Kelly","Steven","Timothy","Shadiah","Lance","Chris","Kang","Perry","Ryan","Kelsey","Nella","Ben","Brandon","Hongjun","Jake","Sasha","Susan","Kirito","Jerry","Larry","Summer","Steve","Alex","Asuna","Night","Calvin","Darwin","Mouse #3","Watson","NAME YOUR MOUSE NEXT TIME","Kate","Taylor","Lauren","Megan","Amber","Matt","David","Andrew","James","John","Joseph","Nicholas","William","Jonathan","Tyler","Jennifer","Emily","Samantha","Elizabeth","Nicole","Tuesday","Chicken","Cheese Grate","Joel","Razzi","Roan","Shen","Janhavi","Ellen","Russitano","Nielsen","Liam","Justin","Chess is a Sport","Golf is also a Sport","Savin","Morgan","Hom","Covfee","Breux","Yeiter","White","Freedman","Trump",
+];
+//traits: trait 1-color(brown,white); trait 2-eye(black,red); trait 3-growth(slow,fast); trait 4-size(large,small); trait 5-tail(long,short). First Number is age(weeks 7 is adult. Mice die after two years, or 100 weeks. Mice develop as embryo for 3 weeks). Second Number is health.
+function addMouse(bypass,name,a,b,c,d,e) {
+    var birthName = "";
+    if (bypass === 1) {
+        if (name === "") {
+            var randNumb = Math.floor(Math.random() * 99); 
+            birthName = randNames[randNumb];
+            miceNames.push(birthName);
+        } else {
+            miceNames.push(name);
+        }
+        miceAge.push(0);
+        miceHealth.push(100);
+        miceTraitA.push(a);
+        miceTraitB.push(b);
+        miceTraitC.push(c);
+        miceTraitD.push(d);
+        miceTraitE.push(e);
+    }
+    $("#mice").empty();
+    updateMice();
+}
+function killMouse(index) {
+    miceNames.splice(index,1);
+    miceAge.splice(index,1);
+    miceHealth.splice(index,1);
+    miceTraitA.splice(index,1);
+    miceTraitB.splice(index,1);
+    miceTraitC.splice(index,1);
+    miceTraitD.splice(index,1);
+    miceTraitE.splice(index,1);
+}
+function par(i) {
+    console.log(i);
+    
+}
+function updateMice(i) {
+    for (var i=0;i<miceNames.length;i++) {
+        if (30<=temp<=32) {
+            if ((Math.floor(Math.random() * 2) + 1) <= 1) {
+                miceHealth[i] = miceHealth[i] - 5;
+            }
+        }
+        
+        if (miceHealth[i] <= 0) {
+            killMouse(i);
+        } else {
+            var age = miceAge[i];
+            if (miceTraitC >= 3) {
+                miceAge[i] = age + 2;
+            } else {
+                miceAge[i] = age + 1;
+            }
+            var mature = "No";
+            if (miceAge[i] >= 7) {
+                var mature = "Yes";
+            }
+            
+            var disName = $("<p>").text("Mouse: " + miceNames[i]);
+            var disHealth = $("<p>").text("Health: " + miceHealth[i]);
+            var disAge = $("<p>").text("Age: " + miceAge[i]);
+            var disMature = $("<p>").text("Mature: " + mature);
+            
+            var disTrait1 = "Brown";
+            var disTrait2 = "Black";
+            var disTrait3 = "Average";
+            var disTrait4 = "Long";
+            if (miceTraitA[i] >= 3) {
+                disTrait1 = "White";
+            }
+            if (miceTraitB[i] >= 3) {
+                disTrait2 = "Red";
+            }
+            if (miceTraitD[i] >= 3) {
+                disTrait3 = "Small";
+            }
+            if (miceTraitE[i] >= 3) {
+                disTrait4 = "Short";
+            }
+            var disChar = $("<p>").text("Characteristics: "+disTrait1+" Fur, "+disTrait2+" Eyes, "+disTrait3+" Size, "+disTrait4+" Tail");
+            var disButton1 = $("<button>").text("Choose as Parent 1").attr("onclick","par1("+i+")");
+            var disButton2 = $("<button>").text("Choose as Parent 2").attr("id","breedParent2"+i);
+            var disBreed = $("<p>").append(disButton1,disButton2);
+            var disMouse = $("<div>").addClass("org").append(disName,disHealth,disAge,disMature,disChar,disBreed);
+            $("#mice").append(disMouse);
+        }
+        //kills or keeps mice based of health
+    }
+}
+function weekCycle() {
+    time++;
+    $("#statTime").text("Time: " + time + " weeks");
+    //controls time
+    
+    var randTemp = Math.floor((Math.random() * 5) + 1);
+    if (temp > randTemp + 20) {
+        temp = temp - ins;    
+    } else if (temp < randTemp + 20) {
+        temp = temp + ins;
+    }
+    $("#statTemp").text(temp);
+    //controls temp
+    
+    var damage = 0;
+    
+    if ((food - miceNames.length * 5) > 0) {
+        food = food - miceNames.length * 5;
+    } else {
+        damage = (food - miceNames.length * 5) / -5;
+        food = 0;
+    }
+    $("#statFood").text(food);
+    
+    for (damage;damage>0;damage--) {
+        var randMouse = Math.floor(Math.random() * miceNames.length);
+        miceHealth[randMouse] = miceHealth[randMouse] - 5;
+    }
+    //controls food
+    
+    $("#mice").empty();
+    updateMice();
+    
+    if (miceNames.length < 1) {
+        $("#mice").append("<p>No mice availible</p>");
+    }
+    //controls mice variables and updates html
+    
+    console.log(miceHealth);
+    
+    setTimeout(arguments.callee, 100000);
+    //timeout should be 30000
+}
+setInterval(weekCycle(), 100);
+
+$("#buyMouse").click(function(){
+    if (money - 10 >= 0) {
+        var shopName = $("#shopName").val();
+        $("#shopName").val("");
+        addMouse(1,shopName,0,0,0,0,0);
+        money = money - 10;
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyCage").click(function(){
+    if (money - 100 >= 0) {
+        money = money - 100;
+        space = space + 50;
+        $("#statSpace").text(space);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyTank").click(function(){
+    if (money - 500 >= 0) {
+        money = money - 500;
+        space = space + 100;
+        $("#statSpace").text(space);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyLab").click(function(){
+    if (money - 5000 >= 0) {
+        money = money - 5000;
+        space = space + 1000;
+        $("#statSpace").text(space);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyCan").click(function(){
+    if (money - 10 >= 0) {
+        money = money - 10;
+        food = food + 50;
+        $("#statFood").text(food);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buySBag").click(function(){
+    if (money - 15 >= 0) {
+        money = money - 15;
+        food = food + 100;
+        $("#statFood").text(food);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyLBag").click(function(){
+    if (money - 30 >= 0) {
+        money = money - 30;
+        food = food + 500;
+        $("#statFood").text(food);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyAir").click(function(){
+    if (money - 600 >= 0) {
+        money = money - 600;
+        temp = temp - 10;
+        $("#statTemp").text(temp);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyHeat").click(function(){
+    if (money - 600 >= 0) {
+        money = money - 600;
+        temp = temp + 10;
+        $("#statTemp").text(temp);
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyIns").click(function(){
+    if (money - 300 >= 0) {
+        money = money - 300;
+        ins = ins / 2;
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+function poor() {
+    alert("Insufficient Funds!");
+}
+//homozygousd is 1 heterozygous is 2 homozygousr is 3. This means that when a cross occurs, we just find the average of
+        </script>
+    </head>
+    <body>
+        <h1>The Breeder's Challenge</h1>
+        <h3>Wow! Breed you're mice! Your goal is to get an all homozygous recessive mouse.</h3>
+        <p>Genetic simulator by Brian Mei.</p>
+        <p id="note54482">NOTE: All things of statistics are functional variables that will affect mice. Research has been put into this project to make it as accurate as possible. With the effort into this project, name your mice appropriate phrases out of respect. Any bugs found should be reported <a href="https://goo.gl/forms/zieiUKpbUOHVvpzz1">here</a>.</p>
+        <button>Start!</button>
+        <div id="container">
+            <div class="org" id="stats">
+                <h3>Statistics</h3>
+                <p>Money: £<span class="statMoney">100</span></p>
+                <p>Space: <span id="statSpace">100</span> centimeters<sup>3</sup></p>    
+                <p>Temperature: <span id="stattemp">22</span>° Celsius</p>
+                <p id="statTime">Time: 0 weeks</p>
+                <p>Food: <span id="statFood">100</span> grams</p>
+            </div>
+            <div class="org" id="miceBreed">
+                <h3>Mice</h3>
+                <div id="mice">    
+                    <div class="org">
+                        <p>Mouse: Josh</p>
+                        <p>Health: 100</p>
+                        <p>Age: 0 weeks</p>
+                        <p>Mature: No</p>
+                        <p>Characteristics: Brown Fur, Black Eyes, Average Size, Long Tail</p>
+                    </div>
+                    <div class="org">
+                        <p>Mouse: Daniel</p>
+                        <p>Health: 100</p>
+                        <p>Age: 0 weeks</p>
+                        <p>Mature: No</p>
+                        <p>Characteristics: Average Size, Brown Fur, Black Eyes, Long Tail</p>
+                    </div>
+                    <div class="org">
+                        <p>Mouse: Pedro</p>
+                        <p>Health: 100</p>
+                        <p>Age: 0 weeks</p>
+                        <p>Mature: No</p>
+                        <p>Characteristics: Average Size, Brown Fur, Black Eyes, Long Tail</p>
+                    </div>
+                </div>
+                <div id="breed">
+                    <p></p>
+                    <h3>Breeding</h3>
+                    <div>
+                        <div id="parent1" class="org">
+                            <strong>Parent 1</strong>
+                            <p>Mouse: <span id="p1name">None</span></p>
+                        </div>
+                        <div id="parent2" class="org">
+                            <strong>Parent 2</strong>
+                            <p>Mouse: <span id="p2name">None</span></p>
+                        </div>
+                    </div>
+                    <input id="breedName" placeholder="Insert Child Name">
+                    <button id="breedMouse">Breed</button>
+                </div>
+            </div>
+            <div class="org" id="shop">
+                <h3>Shop</h3>
+                <p><u>Money: £<span class="statMoney">100</span></u></p>
+                <p>Buy a New Mouse <em>(random genotype)</em> <input id="shopName" placeholder="Insert Mouse Name"><button id="buyMouse">-£10</button></p>
+                
+                <p>Buy Cage <em>+50 centimeters<sup>3</sup></em> <button id="buyCage">-£100</button></p>
+                
+                <p>Buy Glass Tank <em>+100 centimeters<sup>3</sup></em> <button id="buyTank">-£500</button></p>
+                
+                <p>Expand Laboratory <em>+1000 centimeters<sup>3</sup></em> <button id="buyLab">-£5,000</button></p>
+                
+                <p>Buy Canister of Food <em>+50 grams</em> <button id="buyCan">-£10</button></p>
+                
+                <p>Buy Small Bag of Food <em>+100 grams</em> <button id="buySBag">-£15</button></p>
+                
+                <p>Buy Large Bag of Food <em>+500 grams</em> <button id="buyLBag">-£30</button></p>
+                
+                <p>Pay for Air Conditioning <em>-10° Celsius</em> <button id="buyAir">-£600</button></p>
+                
+                <p>Pay for Room Heating <em>+10° Celsius</em> <button id="buyHeat">-£600</button></p>
+                
+                <p>Buy Insulation <em>x1/2 natural effectiveness</em> <button id="buyIns">-£300</button></p>
+                
+                <p>Invest in Time Machine <em>(time is a controlled variable)</em> <button id="buyTime">-£10,000,000</button></p>
+                
+            </div>
+        </div>
+    </body>
+</html>
