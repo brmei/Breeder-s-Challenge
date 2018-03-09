@@ -192,7 +192,12 @@ function updateMice() {
             var disChar = $("<p>").text("Characteristics: "+disTrait1+" Fur, "+disTrait2+" Eyes, "+disTrait3+" Size, "+disTrait4+" Tail");
             var disButton1 = $("<button>").text("Choose as Parent 1").attr("onclick","parA("+i+")");
             var disButton2 = $("<button>").text("Choose as Parent 2").attr("onclick","parB("+i+")");
-            var disSell = $("<button>").text("Sell Mouse (cost based on genotype and condition)").attr("onclick","sell("+i+")");
+            var disSell;
+            if (miceAge[i]>=0) {
+                disSell = $("<button>").text("Sell Mouse (cost based on genotype and condition)").attr("onclick","sell("+i+")");
+            } else {
+                disSell = $("<button>").text("Mouse too young to sell").attr("onclick","young()");
+            }
             var disBreed = $("<p>").append(disButton1,disButton2);
             var disMouse = $("<div>").addClass("org").append(disName,disHealth,disAge,disMature,disChar,disBreed,disSell);
             $("#mice").append(disMouse);
