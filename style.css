@@ -1,7 +1,7 @@
 #container {
     border: solid black 1px;
     margin: 10px;
-    
+    display: none;
 }
 .org {
     border: solid black 1px;    
