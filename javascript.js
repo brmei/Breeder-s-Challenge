@@ -263,7 +263,7 @@ function weekCycle() {
     
     console.log(miceHealth);
     
-    setTimeout(arguments.callee, 100000);
+    setTimeout(arguments.callee, 30000);
     //timeout should be 30000
 }
 $("#breedMouse").click(function(){
