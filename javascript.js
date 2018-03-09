@@ -396,5 +396,6 @@ $("#start").click(function(){
 });
 setInterval(function (){
     money = Math.round(money);
+    $(".statMoney").text(money);
 }, 50);
 //homozygousd is 1 heterozygous is 2 homozygousr is 3. This means that when a cross occurs, we just find the average of
