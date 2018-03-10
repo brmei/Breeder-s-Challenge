@@ -303,8 +303,8 @@ $("#buyMouse").click(function(){
     }
 });
 $("#buyCage").click(function(){
-    if (money - 100 >= 0) {
-        money = money - 100;
+    if (money - 150 >= 0) {
+        money = money - 150;
         space = space + 50;
         $("#statSpace").text(space);
         $(".statMoney").text(money);
@@ -313,8 +313,8 @@ $("#buyCage").click(function(){
     }
 });
 $("#buyTank").click(function(){
-    if (money - 500 >= 0) {
-        money = money - 500;
+    if (money - 250 >= 0) {
+        money = money - 250;
         space = space + 100;
         $("#statSpace").text(space);
         $(".statMoney").text(money);
@@ -323,8 +323,8 @@ $("#buyTank").click(function(){
     }
 });
 $("#buyLab").click(function(){
-    if (money - 5000 >= 0) {
-        money = money - 5000;
+    if (money - 2000 >= 0) {
+        money = money - 2000;
         space = space + 1000;
         $("#statSpace").text(space);
         $(".statMoney").text(money);
