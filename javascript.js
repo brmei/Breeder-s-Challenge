@@ -391,12 +391,10 @@ $("#buyIns").click(function(){
         poor();    
     }
 });
-var tc = true;
 $("#buyTime").click(function(){
     if (money - 1000 >= 0) {
         money = money - 1000;
         timeControl(1);
-        tc = false;
         $("#times").show();
         $(".statMoney").text(money);
     } else {
@@ -421,10 +419,5 @@ $("#start").click(function(){
 setInterval(function (){
     money = Math.round(money);
     $(".statMoney").text(money);
-    if (tc) {
-        $("#times").hide();
-    } else {
-        $("#times").show();
-    }
 }, 50);
 //homozygousd is 1 heterozygous is 2 homozygousr is 3. This means that when a cross occurs, we just find the average of
