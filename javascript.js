@@ -395,7 +395,6 @@ $("#buyTime").click(function(){
     if (money - 1000 >= 0) {
         money = money - 1000;
         timeControl(1);
-        $("#times").show();
         $(".statMoney").text(money);
     } else {
         poor();    
@@ -414,7 +413,6 @@ $("#start").click(function(){
     setInterval(weekCycle(), 100);
     $("#start").hide();
     $("#container").show();
-    $("#times").hide();
 });
 setInterval(function (){
     money = Math.round(money);
