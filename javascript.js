@@ -391,7 +391,7 @@ $("#buyIns").click(function(){
         poor();    
     }
 });
-var tc;
+var tc = true;
 $("#buyTime").click(function(){
     if (money - 1000 >= 0) {
         money = money - 1000;
