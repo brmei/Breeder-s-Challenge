@@ -395,7 +395,7 @@ $("#buyTime").click(function(){
     if (money - 1000 >= 0) {
         money = money - 1000;
         timeControl(1);
-        $(".times").show();
+        $("#times").show();
         $(".statMoney").text(money);
     } else {
         poor();    
