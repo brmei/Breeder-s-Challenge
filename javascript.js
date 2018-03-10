@@ -414,6 +414,7 @@ $("#start").click(function(){
     setInterval(weekCycle(), 100);
     $("#start").hide();
     $("#container").show();
+    $("#times").hide();
 });
 setInterval(function (){
     money = Math.round(money);
