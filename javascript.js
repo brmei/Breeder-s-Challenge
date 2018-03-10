@@ -231,11 +231,11 @@ function sell(i) {
 function timeControl(x) {
     if (x===1) {
         clearTimeout(tt);
-    } else if (x===2) {
-        weekCycle();
-        clearTimeout(tt);
     } else if (x===3) {
         weekCycle();
+        clearTimeout(tt);
+    } else if (x===2) {
+        setInterval(weekCycle(), 100);
     }
 }
 var tt;
