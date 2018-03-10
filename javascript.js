@@ -57,7 +57,7 @@ function addMouse(bypass,name) {
             birthName = randNames[randNumb];
             miceNames.push(birthName);
         } else {
-            error();
+            miceNames.push(name);
         }
         miceAge.push(-3);
         miceHealth.push(100);
