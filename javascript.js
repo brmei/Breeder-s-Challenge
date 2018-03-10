@@ -228,6 +228,17 @@ function sell(i) {
     $("#mice").empty();
     updateMice();
 }
+function timeControl(x) {
+    if (x===1) {
+        clearTimeout(tt);
+    } else if (x===2) {
+        weekCycle();
+        clearTimeout(tt);
+    } else if (x===3) {
+        weekCycle();
+    }
+}
+var tt;
 function weekCycle() {
     time++;
     $("#statTime").text("Time: " + time + " weeks");
@@ -268,7 +279,7 @@ function weekCycle() {
     
     console.log(miceHealth);
     
-    setTimeout(arguments.callee, 30000);
+    tt = setTimeout(arguments.callee, 30000);
     //timeout should be 30000
 }
 $("#breedMouse").click(function(){
@@ -375,6 +386,16 @@ $("#buyIns").click(function(){
     if (money - 300 >= 0) {
         money = money - 300;
         ins = ins / 2;
+        $(".statMoney").text(money);
+    } else {
+        poor();    
+    }
+});
+$("#buyTime").click(function(){
+    if (money - 1000 >= 0) {
+        money = money - 1000;
+        timeControl(1);
+        $(".times").show();
         $(".statMoney").text(money);
     } else {
         poor();    
