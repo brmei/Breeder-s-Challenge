@@ -413,6 +413,7 @@ $("#start").click(function(){
     setInterval(weekCycle(), 100);
     $("#start").hide();
     $("#container").show();
+    load();
 });
 setInterval(function (){
     money = Math.round(money);
