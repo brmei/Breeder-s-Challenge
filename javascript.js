@@ -364,9 +364,9 @@ $("#buyLBag").click(function(){
     }
 });
 $("#buyAir").click(function(){
-    if (money - 600 >= 0) {
-        money = money - 600;
-        temp = temp - 10;
+    if (money - 60 >= 0) {
+        money = money - 60;
+        temp = temp - 1;
         $("#statTemp").text(temp);
         $(".statMoney").text(money);
     } else {
