@@ -392,10 +392,12 @@ $("#buyIns").click(function(){
         poor();    
     }
 });
+var haveTime;
 $("#buyTime").click(function(){
     if (money - 1000 >= 0) {
         money = money - 1000;
         timeControl(1);
+        haveTime = 1;
         $(".statMoney").text(money);
     } else {
         poor();    
@@ -419,6 +421,9 @@ $("#start").click(function(){
 setInterval(function (){
     money = Math.round(money);
     $(".statMoney").text(money);
+    if (haveTime === 1) {
+        $("#times").show();    
+    }
 }, 50);
 //homozygousd is 1 heterozygous is 2 homozygousr is 3. This means that when a cross occurs, we just find the average of
 function setCookie(cname, cvalue, exdays) {
