@@ -394,8 +394,8 @@ $("#buyIns").click(function(){
 });
 var haveTime;
 $("#buyTime").click(function(){
-    if (money - 1000 >= 0) {
-        money = money - 1000;
+    if (money - 2500 >= 0) {
+        money = money - 2500;
         timeControl(1);
         haveTime = 1;
         $(".statMoney").text(money);
