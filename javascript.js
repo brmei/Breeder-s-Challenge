@@ -146,7 +146,7 @@ function updateMice() {
         }
         if (temp>=30 && temp<=32) {
             if ((Math.floor(Math.random() * 2) + 1) <= 1) {
-                miceHealth[i] = miceHealth[i] + 5;
+                miceHealth[i] = miceHealth[i] - 5;
             }
         } else {
             if ((Math.floor(Math.random() * 2) + 1) <= 1) {
